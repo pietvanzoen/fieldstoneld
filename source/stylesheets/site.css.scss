@@ -1,7 +1,113 @@
 @charset "utf-8";
-@import "normalize";
+@import "helpers";
+@import "foundation";
+
+$color-green: #A4C27B;
+$color-font-base: #333;
 
 body {
 	font-family: 'Josefin Sans', sans-serif;
-	font-size: 1em;
+	font-size: 1.3em;
+	color: $color-font-base;
+	font-weight: 400;
+	line-height: 1.1;
+	margin: 0;
+	background-color: transparent;
+}
+
+html {
+	background-color: #eee;
+	background: url('/images/about.jpg') no-repeat center center fixed;
+	-webkit-background-size: cover;
+	background-size: cover;
+	position: relative;
+	min-height: 100%;
+	box-sizing: border-box;
+	margin-bottom: 100px;
+}
+
+a, a:visited, a:focus {
+	text-decoration: none;
+	color: $color-green;
+}
+a:hover, a.current {
+	color: #000;
+}
+
+blockquote {
+	margin: 1em 0 1em 1em;
+	font-style: italic;
+}
+
+$sizes: (
+	("none", 0),
+	//("tiny", 0.1rem),
+	("small", 0.5em),
+	("medium", 1em),
+	//("large", 1rem)
+);
+@include make-spacing-helpers($sizes);
+
+.main {
+	padding: 1em;
+}
+.text-center {
+	text-align: center;
+}
+
+.header {
+	background-color: #fff;
+	width: 100%;
+	max-width: none;
+	padding: 0.3em 0.5em;
+}
+.header-title,
+.header-menu {
+	margin: 0.3em 0;
+	text-align: center;
+	img { width: 150px; }
+	h1 {
+		font-size: 0;
+		margin: 0;
+	}
+}
+.header-menu {
+	padding: 0;
+	list-style: none;
+}
+.header-menu-item {
+	font-size: 0.8em;
+	padding: 0 0.2em;
+	display: inline-block;
+	text-transform: lowercase;
+
+	a {
+		color: $color-font-base;
+	}
+	a:hover, a.current {
+		color: $color-green;
+	}
+}
+
+
+@media screen and (min-width: 40em) {
+	.header {
+		position: relative;
+		padding: 0.5em 1em;
+	}
+	.header-menu {
+		padding: 0 1em;
+	}
+	.header-title,
+	.header-menu {
+		vertical-align: top;
+		display: inline-block;
+		img {
+			width: 300px;
+		}
+		text-align: left;
+	}
+	.header-menu-item {
+		font-size: 1em;
+	}
 }

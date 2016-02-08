@@ -1,0 +1,69 @@
+
+@mixin make-prop($classname, $prop, $sizevalue) {
+	#{$classname} {
+		#{$prop}: $sizevalue !important;
+	}
+}
+
+@mixin make-size($name, $props, $sizename, $sizevalue) {
+	$default-size: 'medium';
+
+	@each $p in $props {
+		$propname: #{nth($p, 1)};
+		$prop: #{nth($p, 2)};
+		$classname: '.#{$name}-#{$propname}-#{$sizename}';
+
+		// specific size prop class. e.g. .buffer-top-small
+		@include make-prop($classname, $prop, $sizevalue);
+
+		// general size class. e.g. .buffer-small
+		.#{$name}-#{$sizename} { @extend #{$classname}; }
+
+		// default size class. e.g. .buffer-medium extends .buffer-medium-top and
+		// .buffer-medium-small
+		@if $sizename == $default-size {
+			.#{$name}-#{$propname} { @extend #{$classname}; }
+		}
+	}
+
+	@if $sizename == $default-size {
+		// general default size class. e.g .buffer extends .buffer-medium
+		.#{$name} { @extend .#{$name}-#{$sizename}; }
+	}
+}
+
+@mixin make-set($name, $props, $sizes) {
+	@each $size in $sizes {
+		$sizename: #{nth($size, 1)};
+		$sizevalue: #{nth($size, 2)};
+		@include make-size($name, $props, $sizename, $sizevalue);
+	}
+}
+
+@mixin make-spacing-helpers($sizes) {
+
+	$types: (
+					('gutter', (
+									('left', 'padding-left'),
+									('right', 'padding-right')
+					)
+					),
+					('buffer', (
+									('top', 'margin-top'),
+									('bottom', 'margin-bottom')
+					)
+					),
+					('padder', (
+									('top', 'padding-top'),
+									('bottom', 'padding-bottom')
+					)
+					)
+	);
+
+	@each $set in $types {
+		$setname: nth($set, 1);
+		$props: nth($set, 2);
+		@include make-set($setname, $props, $sizes);
+	}
+
+}

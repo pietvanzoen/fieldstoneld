@@ -42,11 +42,14 @@ end
 ###
 
 # Methods defined in the helpers block are available in templates
-# helpers do
-#   def some_helper
-#     "Helping"
-#   end
-# end
+helpers do
+	def nav_link(link, url, opts={})
+		if current_resource.url == url_for(url)
+			opts[:class] = "current"
+		end
+		link_to(link, url, opts)
+	end
+end
 
 # Build-specific configuration
 configure :build do
