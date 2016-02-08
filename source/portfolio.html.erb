@@ -1,0 +1,10 @@
+---
+title: Portfolio
+layout: 'page'
+---
+
+<% blog('portfolio').articles.each do |article| %>
+	<article>
+		<h2><%= link_to article.title, article.path %></h2>
+	</article>
+<% end %>
