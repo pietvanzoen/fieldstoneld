@@ -20,7 +20,21 @@ page '/*.txt', layout: false
 
 # Reload the browser automatically whenever files change
 configure :development do
-  activate :livereload
+	activate :livereload
+end
+
+activate :directory_indexes
+
+activate :blog do |blog|
+	blog.name = 'portfolio'
+	blog.layout = 'portfolio'
+	blog.sources = 'portfolio/{year}-{month}-{day}-{title}.html'
+	blog.permalink = 'portfolio/{title}.html'
+end
+
+activate :deploy do |deploy|
+	deploy.build_before = true
+	deploy.deploy_method = :git
 end
 
 ###
@@ -36,9 +50,6 @@ end
 
 # Build-specific configuration
 configure :build do
-  # Minify CSS on build
-  # activate :minify_css
-
-  # Minify Javascript on build
-  # activate :minify_javascript
+	activate :minify_css
+	activate :minify_javascript
 end

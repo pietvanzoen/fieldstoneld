@@ -1,0 +1,9 @@
+<% wrap_layout :layout do %>
+	<article>
+		<h1><%= current_article.title %></h1>
+
+		<%= yield %>
+
+		<%= link_to 'Back to portfolio', '/portfolio.html' %>
+	</article>
+<% end  %>
