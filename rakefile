@@ -1,1 +1,23 @@
-require 'middleman-gh-pages'
+require 'middleman'
+
+task :portfolio, :title do |t, opts|
+	title = opts[:title]
+
+	if !title || title.empty?
+		raise 'Must specify a title.'
+	end
+
+	path = "source/portfolio/#{Date.today.iso8601}-#{Middleman::Util::UriTemplates.safe_parameterize(title)}.html.md"
+	if File.exists? path
+		puts "File #{path} already exists."
+	else
+		puts "Creating #{path}."
+		File.open(path, 'w+') do |f|
+			f << "---\n"
+			f << "title: '#{title}'\n"
+			f << "---\n"
+			f << "\n"
+			f << "# #{title}\n"
+		end
+	end
+end
