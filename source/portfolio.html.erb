@@ -1,10 +1,15 @@
 ---
 title: Portfolio
-layout: 'page'
+background_image: '/images/about.jpg'
 ---
 
+<div class="row collapse">
 <% blog('portfolio').articles.each do |article| %>
-	<article>
-		<h2><%= link_to article.title, article.path %></h2>
-	</article>
+	<a class="portfolio-item small-12 medium-4 large-3 columns end"
+		href="<%= article.url %>"
+		title="<%= article.title %>">
+		<span class="portfolio-item-cover-image" style="background-image: url('<%= article.url + article.data.cover_image %>')"></span>
+		<span class="is-hidden"><%= article.title %></span>
+	</a>
 <% end %>
+</div>

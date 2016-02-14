@@ -1,4 +1,8 @@
 @charset "utf-8";
+
+$medium-breakpoint: 30em;
+$large-breakpoint: 54em;
+
 @import "helpers";
 @import "foundation";
 
@@ -17,7 +21,7 @@ body {
 
 html {
 	background-color: #eee;
-	background: url('/images/about.jpg') no-repeat center center fixed;
+	background: no-repeat center center fixed;
 	-webkit-background-size: cover;
 	background-size: cover;
 	position: relative;
@@ -111,3 +115,42 @@ $sizes: (
 		font-size: 1em;
 	}
 }
+
+.portfolio-item {
+	position: relative;
+	overflow: hidden;
+	background-color: #eee;
+
+	padding-top: 100%;
+	@media screen and (min-width: $medium-breakpoint) {
+		padding-top: 33%;
+	}
+	@media screen and (min-width: $large-breakpoint) {
+		padding-top: 25%;
+	}
+
+	transition: filter 0.2s ease-in-out;
+	-webkit-transition: -webkit-filter 0.2s ease-in-out;
+	filter: grayscale(100%);
+	-webkit-filter: grayscale(100%);
+}
+.portfolio-item-cover-image {
+	opacity: 0.8;
+	transition: opacity 0.2s ease-in-out;
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: no-repeat center center;
+	background-size: cover;
+	transform: scale(1.3);
+}
+.portfolio-item:hover {
+	filter: grayscale(0);
+	-webkit-filter: grayscale(0);
+	.portfolio-item-cover-image {
+		opacity: 1;
+	}
+}
+

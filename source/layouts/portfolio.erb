@@ -1,9 +1,24 @@
 <% wrap_layout :layout do %>
-	<article>
-		<h1><%= current_article.title %></h1>
+	<article class="main">
 
-		<%= yield %>
+		<div class="row expanded small-12 columns"><h1><%= current_article.title %></h1></div>
 
-		<%= link_to 'Back to portfolio', '/portfolio.html' %>
+		<div class="row expanded">
+
+			<div class="small-12 medium-5 columns">
+				<%= yield %>
+				<%= link_to 'Back to portfolio', '/portfolio.html' %>
+			</div>
+
+			<div class="small-12 medium-7 columns">
+				<img src="<%= page_images.first %>" alt="">
+			</div>
+
+		</div>
+
 	</article>
 <% end  %>
+
+<% portfolio_images.each do |image| %>
+	<img src="<%= image %>" alt="">
+<% end %>

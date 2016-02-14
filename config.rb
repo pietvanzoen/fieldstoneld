@@ -49,6 +49,31 @@ helpers do
 		end
 		link_to(link, url, opts)
 	end
+
+	def page_files
+		dir = "source/#{current_page.path.sub('.html', '')}"
+		files = []
+		if Dir.exists? dir
+			files = Dir.entries(dir).
+				select { |f| !File.directory? f }.
+				map { |f| "#{current_page.url}#{f}"}
+		end
+		files
+	end
+
+	def page_images
+		accepted_ext = ['.png', '.jpg']
+		page_files.select do |f|
+			accepted_ext.include? File.extname f
+		end
+	end
+
+	def portfolio_images
+		page_images.reject do |f|
+			f.include? 'matrix.jpg'
+		end
+	end
+
 end
 
 # Build-specific configuration
