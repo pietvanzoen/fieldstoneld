@@ -1,24 +1,35 @@
-<% wrap_layout :layout do %>
-	<article class="main">
+<%
+@description = current_article.summary
+@title = [current_article.title, 'Portfolio'].join(config.title_delimiter)
+%>
+<%= partial 'slider' %>
 
-		<div class="row expanded small-12 columns"><h1><%= current_article.title %></h1></div>
+<% wrap_layout :layout do %>
+	<article class="main js-project">
+
+		<div class="row expanded small-12 columns"><h1 class="buffer-bottom-none"><%= current_article.title %></h1></div>
 
 		<div class="row expanded">
 
 			<div class="small-12 medium-5 columns">
 				<%= yield %>
-				<%= link_to 'Back to portfolio', '/portfolio.html' %>
+				<h3 class="text-uppercase"><a href="#gallery">Begin Slideshow</a></h3>
+				<h3><%= link_to 'Go back to project list', '/portfolio.html' %></h3>
 			</div>
 
-			<div class="small-12 medium-7 columns">
-				<img src="<%= page_images.first %>" alt="">
+			<div class="small-12 medium-7 columns buffer-top">
+				<a href="#gallery"><img src="<%= page_images.first %>" alt=""></a>
 			</div>
 
 		</div>
 
 	</article>
-<% end  %>
-
-<% portfolio_images.each do |image| %>
-	<img src="<%= image %>" alt="">
 <% end %>
+
+<%= partial(:slider, :locals => { :images => page_images }) %>
+<script type="text/javascript" charset="utf-8">
+$(document).ready(function () {
+	initSlider();
+	initPortfolioGallery();
+});
+</script>

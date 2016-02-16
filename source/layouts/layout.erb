@@ -5,13 +5,12 @@
 		<meta charset="utf-8">
 		<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
-		<!-- Use title if it's in the page YAML frontmatter -->
-		<title><%= [current_page.data.title, "Fieldstone Landscape Development"].compact.join(' | ') %></title>
+		<title><%= [@title || current_page.data.title, config.site_title].compact.join(config.title_delimiter) %></title>
+		<meta name="description" content="<%= strip_tags @description || 'Led by Manoli Galanakis, Fieldstone is a full service landscape development firm providing design, site management and installation.'  %>" />
 
 		<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,600,400italic' rel='stylesheet' type='text/css'>
 
 		<%= stylesheet_link_tag :site %>
-		<%# javascript_include_tag :all %>
 	</head>
 
 	<body class="<%= page_classes %> sticky-container">

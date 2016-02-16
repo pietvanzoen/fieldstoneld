@@ -1,8 +1,10 @@
 <% wrap_layout :layout do %>
-	<article class="main">
-		<% if current_page.data.title %>
-			<h1><%= current_page.data.title %></h1>
-		<% end %>
-		<%= yield %>
+	<article class="row">
+		<div class="small-12 medium-7 columns">
+			<% if current_page.data.title %>
+				<h1 class="is-hidden"><%= current_page.data.title %></h1>
+			<% end %>
+			<%= yield %>
+		</div>
 	</article>
 <% end  %>

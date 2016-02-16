@@ -9,16 +9,11 @@ page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
 
-# With alternative layout
-# page "/path/to/file.html", layout: :otherlayout
-
-# Proxy pages (http://middlemanapp.com/basics/dynamic-pages/)
-# proxy "/this-page-has-no-template.html", "/template-file.html", locals: {
-#  which_fake_page: "Rendering a fake page with a local variable" }
-
 # General configuration
 
-# Reload the browser automatically whenever files change
+config[:site_title] = 'Fieldstone Landscape Development'
+config[:title_delimiter] = '  |  '
+
 configure :development do
 	activate :livereload
 end
@@ -43,6 +38,7 @@ end
 
 # Methods defined in the helpers block are available in templates
 helpers do
+
 	def nav_link(link, url, opts={})
 		if current_resource.url == url_for(url)
 			opts[:class] = "current"
@@ -50,27 +46,30 @@ helpers do
 		link_to(link, url, opts)
 	end
 
-	def page_files
-		dir = "source/#{current_page.path.sub('.html', '')}"
+	def files_from_dir( source_dir, build_dir = nil )
+		dir = "source/#{source_dir}"
+		build_dir ||= source_dir
 		files = []
 		if Dir.exists? dir
 			files = Dir.entries(dir).
 				select { |f| !File.directory? f }.
-				map { |f| "#{current_page.url}#{f}"}
+				map { |f| File.join(build_dir, f) }
 		end
 		files
 	end
 
-	def page_images
+	def images_from_dir( source_dir, build_dir=nil )
 		accepted_ext = ['.png', '.jpg']
-		page_files.select do |f|
+		files_from_dir( source_dir, build_dir ).select do |f|
 			accepted_ext.include? File.extname f
 		end
 	end
 
-	def portfolio_images
-		page_images.reject do |f|
-			f.include? 'matrix.jpg'
+	def page_images
+		accepted_ext = ['.png', '.jpg']
+		page_dir = current_page.path.sub('.html', '')
+		images_from_dir( page_dir, current_page.url ).select do |f|
+			accepted_ext.include? File.extname f
 		end
 	end
 

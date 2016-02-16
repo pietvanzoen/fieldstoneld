@@ -1,0 +1,17 @@
+<%
+	css ||= ''
+	images ||= []
+%>
+<div class="js-gallery-container gallery <%= css %>">
+	<a class="gallery-exit" href="#" style="display: none">Exit</a>
+	<div class="js-gallery gallery-inner">
+		<% images.each do |image| %>
+			<div style="background-image: url('<%= image %>')"></div>
+		<% end %>
+	</div>
+</div>
+
+<%= stylesheet_link_tag '//cdn.jsdelivr.net/jquery.slick/1.5.8/slick.css' %>
+<%= javascript_include_tag '//code.jquery.com/jquery-1.12.0.min.js' %>
+<%= javascript_include_tag '//cdn.jsdelivr.net/jquery.slick/1.5.8/slick.min.js' %>
+<%= javascript_include_tag :slider %>
