@@ -191,7 +191,7 @@ $sizes: (
 	height: 100vh;
 	width: 100%;
 	@media screen and (min-width: $medium-breakpoint) {
-		height: calc(100vh - 100px);
+		height: calc(100vh - 80px);
 	}
 }
 .gallery--inline,
@@ -213,7 +213,10 @@ $sizes: (
 	background: no-repeat center center;
 	background-size: contain;
 	width: 100%;
-	height: calc(100vh - 100px);
+	height: 100vh;
+	@media screen and (min-width: $medium-breakpoint) {
+		height: calc(100vh - 80px);
+	}
 	&:focus {
 		outline: none;
 	}
