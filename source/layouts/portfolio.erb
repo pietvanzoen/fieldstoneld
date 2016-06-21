@@ -3,7 +3,6 @@
 @title = [current_article.title, 'Portfolio'].join(config.title_delimiter)
 @cover_image_url = File.join(config.site_url, current_article.url, current_article.data.cover_image)
 %>
-<%= partial 'slider' %>
 
 <% wrap_layout :layout do %>
 	<article class="main js-project">
@@ -25,6 +24,7 @@
 		</div>
 
 	</article>
+	<%= partial 'slider' %>
 <% end %>
 
 <%= partial(:slider, :locals => { :images => page_images }) %>
