@@ -3,8 +3,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <% pages.each do |p| %>
   <url>
-    <loc>http://fieldstoneld.com/<%=p.destination_path.gsub('/index.html','')%></loc>
-    <priority>0.7</priority>
+    <loc>http://fieldstoneld.com/<%=p.destination_path.gsub('index.html','')%></loc>
   </url>
 <% end %>
 </urlset>
