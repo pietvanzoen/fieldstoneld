@@ -22,17 +22,17 @@ task :portfolio, :title do |t, opts|
 	end
 end
 
-namespace :deploy do
-	def deploy(env)
-		puts "Deploying to #{env}"
-		system "FIELDSTONE_ENV=#{env} bundle exec middleman deploy"
+namespace :build do
+	def build(env)
+		puts "Building for #{env}"
+		system "FIELDSTONE_ENV=#{env} bundle exec middleman build"
 	end
 
 	task :staging do
-		deploy :staging
+		build :staging
 	end
 
 	task :production do
-		deploy :production
+		build :production
 	end
 end
