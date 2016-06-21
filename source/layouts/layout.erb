@@ -5,8 +5,26 @@
 		<meta charset="utf-8">
 		<meta content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" name="viewport">
 
-		<title><%= [@title || current_page.data.title, config.site_title].compact.join(config.title_delimiter) %></title>
-		<meta name="description" content="<%= strip_tags @description || 'Led by Manoli Galanakis, Fieldstone is a full service landscape development firm providing design, site management and installation.'  %>" />
+		<%
+		@meta_title = [@title || current_page.data.title, config.site_title].compact.join(config.title_delimiter)
+		@meta_description = strip_tags @description || config.site_description
+		@meta_url = File.join(config.site_url, current_page.url)
+		@meta_image_url = current_page.data.image_url || @cover_image_url
+		%>
+
+		<title><%= @meta_title %></title>
+		<meta property="og:title" content="<%= @meta_title %>" />
+		<meta property="og:description" content="<%= @meta_description %>" />
+		<meta name="description" content="<%= @meta_description %>" />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="<%= config.site_title %>">
+		<meta property="og:url" content="<%= @meta_url %>">
+		<link rel="canonical" href="<%= @meta_url %>" />
+		<meta name="twitter:card" content="summary" />
+
+		<% if @meta_image_url %>
+		<meta property="og:image" content="<%= @meta_image_url %>">
+		<% end %>
 
 		<link href='//fonts.googleapis.com/css?family=Josefin+Sans:400,600,400italic' rel='stylesheet' type='text/css'>
 

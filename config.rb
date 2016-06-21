@@ -13,6 +13,8 @@ page '/*.txt', layout: false
 
 config[:site_title] = 'Fieldstone Landscape Development'
 config[:title_delimiter] = '  |  '
+config[:site_description] = 'Led by Manoli Galanakis, Fieldstone is a full service landscape development firm providing design, site management and installation.'
+config[:site_url] = 'http://fieldstoneld.com/'
 
 configure :development do
 	activate :livereload
@@ -71,6 +73,10 @@ helpers do
 		images_from_dir( page_dir, current_page.url ).select do |f|
 			accepted_ext.include? File.extname f
 		end
+	end
+
+	def full_page_title
+		
 	end
 
 end

@@ -1,6 +1,7 @@
 <%
 @description = current_article.summary
 @title = [current_article.title, 'Portfolio'].join(config.title_delimiter)
+@cover_image_url = File.join(config.site_url, current_article.url, current_article.data.cover_image)
 %>
 <%= partial 'slider' %>
 
