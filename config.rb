@@ -15,6 +15,7 @@ config[:site_title] = 'Fieldstone Landscape Development'
 config[:title_delimiter] = '  |  '
 config[:site_description] = 'Led by Manoli Galanakis, Fieldstone is a full service landscape development firm providing design, site management and installation.'
 config[:site_url] = 'http://fieldstoneld.com/'
+config[:env] = ENV['FIELDSTONE_ENV'].to_s.downcase || 'develop'
 
 configure :development do
 	activate :livereload
@@ -29,9 +30,22 @@ activate :blog do |blog|
 	blog.permalink = 'portfolio/{title}.html'
 end
 
-activate :deploy do |deploy|
-	deploy.build_before = true
-	deploy.deploy_method = :git
+case config[:env]
+when 'production'
+	activate :deploy do |deploy|
+		deploy.build_before = true
+		deploy.deploy_method   = :sftp
+		deploy.host            = '0384abb.netsolhost.com'
+		deploy.path            = '/'
+		deploy.port            = 22
+		deploy.user            = ENV['FIELDSTONE_SFTP_USER']
+		deploy.password        = ENV['FIELDSTONE_SFTP_PW']
+	end
+else
+	activate :deploy do |deploy|
+		deploy.build_before = true
+		deploy.deploy_method = :git
+	end
 end
 
 ###
